@@ -1,0 +1,37 @@
+#include <iostream>
+#include <math.h>
+int main()
+{
+    float x, p, p0, a, b, c, h, Ak, sn, P2;
+    int n, m, i, k;
+    printf("Enter a, b, c, p0, h, n, m :\n");
+    scanf("%f%f%f%f%f%i%i",&a, &b, &c,&p0, &h, &n, &m);
+    if (a < b && a < c) {x = a;}
+    else 
+    {
+        if (b < c && b < a) {x = b;}
+        else {x = c;}
+    }
+    printf("\nx = %.1f\n", x);
+    for (i = 1; i <= m; i++)
+    {
+        P2 = 0;
+        sn = 0;
+        p = p0+(i-1)*h;
+        printf("\np = %.1f\n", p);
+        Ak = p*exp(2)/2;
+        sn = sn + Ak;
+        printf("\nA1 = %f\n", Ak);
+        P2 = Ak;
+        for (k=2; k<=n; k++)
+       {
+            Ak=Ak*(cos(x)*k*exp(2)/((k+1)*(2*k-3)*(2*k-2)));
+            if ((k) % 2 != 0) {sn = sn + Ak;}
+            printf("A%i = %.10f\n" , k, Ak);
+            if (k == 2) {P2 = P2 * Ak;} 
+        }
+    printf("\tA1*A2 =  %f\n" ,P2 );
+    printf("\tsum of odd numbers =  %f\n\n" ,sn );
+    }
+return 0;
+}   
